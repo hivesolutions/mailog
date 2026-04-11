@@ -29,21 +29,23 @@ class ActivityAPIController(RootAPIController):
 
         payload = get_object(alias=True, find=True, limit=0)
         activities: list[Activity] = Activity.find(**payload)
-        lines: list[str] = ["timestamp,sender,recipients,subject,status,server,username,message_id,error"]
-        for a in activities:
-            recipients = ";".join(a.recipients) if a.recipients else ""
+        lines: list[str] = [
+            "timestamp,sender,recipients,subject,status,server,username,message_id,error"
+        ]
+        for activity in activities:
+            recipients = ";".join(activity.recipients) if activity.recipients else ""
             lines.append(
                 ",".join(
                     [
-                        str(a.timestamp),
-                        a.sender or "",
+                        str(activity.timestamp),
+                        activity.sender or "",
                         recipients,
-                        a.subject or "",
-                        a.status or "",
-                        a.server or "",
-                        a.username or "",
-                        a.message_id or "",
-                        a.error or "",
+                        activity.subject or "",
+                        activity.status or "",
+                        activity.server or "",
+                        activity.username or "",
+                        activity.message_id or "",
+                        activity.error or "",
                     ]
                 )
             )

@@ -96,6 +96,4 @@ class Activity(MailogBase):
     def export_url(cls, absolute: bool = False) -> str | None:
         from appier import get_app
 
-        return get_app().url_for(
-            "activity_api.export_csv", absolute=absolute
-        )
+        return get_app().url_for("activity_api.export_csv", absolute=absolute)

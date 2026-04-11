@@ -7,9 +7,7 @@ from appier_extras import AdminPart
 
 class MailogApp(WebApp):
     def __init__(self, *args, **kwargs):
-        WebApp.__init__(
-            self, name="mailog", parts=(AdminPart,), *args, **kwargs
-        )
+        WebApp.__init__(self, name="mailog", parts=(AdminPart,), *args, **kwargs)
 
     def _version(self) -> str:
         return "0.1.0"
