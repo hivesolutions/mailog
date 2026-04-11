@@ -3,6 +3,8 @@ on:
   push:
     branches-ignore:
       - none
+    tags:
+      - "*"
     paths:
       - "**"
   workflow_dispatch:
