@@ -17,4 +17,7 @@ ADD src /src
 
 RUN pip install -r /requirements.txt && pip install -r /extra.txt && pip install --upgrade netius uvicorn
 
+RUN useradd -r -s /bin/false mailog
+USER mailog
+
 CMD ["/usr/local/bin/python", "/src/mailog/main.py"]
