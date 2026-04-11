@@ -1,0 +1,33 @@
+# [Mailog](http://mailog.bemisc.com)
+
+SMTP relay activity dashboard powered by [Appier](https://github.com/hivesolutions/appier). Receives delivery status webhooks from [netius](https://github.com/hivesolutions/netius) `ActivityRelaySMTPServer` and provides an admin interface for browsing email activity.
+
+## Configuration
+
+| Name                | Type  | Default     | Description                                           |
+| ------------------- | ----- | ----------- | ----------------------------------------------------- |
+| **MONGOHQ_URL**     | `str` | `localhost` | MongoDB connection string                             |
+| **ACTIVITY_SECRET** | `str` | `None`      | Shared secret for webhook authentication (optional)   |
+| **SERVER**          | `str` | `uvicorn`   | ASGI server to use                                    |
+| **HOST**            | `str` | `127.0.0.1` | Bind address                                          |
+| **PORT**            | `int` | `8080`      | Bind port                                             |
+
+## Netius Integration
+
+Configure the netius `ActivityRelaySMTPServer` to point at this service:
+
+```bash
+export SMTP_ACTIVITY_URL=http://localhost:8080/api/activity
+export SMTP_ACTIVITY_SECRET=your-shared-secret
+```
+
+## Running
+
+```bash
+pip install -r requirements.txt
+PYTHONPATH=src python -m mailog
+```
+
+## License
+
+Mailog is currently licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/).
