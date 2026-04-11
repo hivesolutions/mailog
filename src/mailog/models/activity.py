@@ -77,6 +77,10 @@ class Activity(MailogBase):
     )
 
     @classmethod
+    def _plural(cls) -> str:
+        return "Activities"
+
+    @classmethod
     def list_names(cls) -> list[str]:
         return ["timestamp", "sender", "subject", "status", "server"]
 

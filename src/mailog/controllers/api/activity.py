@@ -20,7 +20,7 @@ class ActivityAPIController(RootAPIController):
             if header_secret != secret:
                 raise OperationalError(message="Invalid secret", code=401)
 
-        activity = Activity.new(safe=True)
+        activity = Activity.new(safe=False)
         activity.save()
         return activity.map()
 

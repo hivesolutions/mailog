@@ -19,6 +19,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 *
 
+## [0.1.1] - 2026-04-12
+
+### Fixed
+
+* Use `safe=False` in activity webhook endpoint so all fields are accepted from the JSON payload
+* Add `_plural` override to `Activity` model to return "Activities" instead of "Activitys"
+
 ## [0.1.0] - 2026-04-11
 
 ### Added
