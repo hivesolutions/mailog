@@ -21,7 +21,7 @@ STATUS_C: dict[str, str] = dict(
 class Activity(MailogBase):
     timestamp: float = cast(
         float,
-        field(type=float, index=True, safe=True),
+        field(type=float, index=True, safe=True, meta="datetime"),
     )
 
     sender: str | None = cast(
@@ -69,6 +69,16 @@ class Activity(MailogBase):
     headers: dict = cast(
         dict,
         field(type=dict, safe=True),
+    )
+
+    sessions: list[dict] = cast(
+        list[dict],
+        field(
+            type=list,
+            safe=True,
+            description="Delivery Sessions",
+            observations="Per-domain SMTP session deliverability info",
+        ),
     )
 
     error: str | None = cast(

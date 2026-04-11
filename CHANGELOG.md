@@ -9,11 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-*
+* Add `sessions` field to `Activity` model for per-domain SMTP session deliverability info
 
 ### Changed
 
-*
+* Add `meta="datetime"` to `Activity.timestamp` field for proper datetime rendering
 
 ### Fixed
 
