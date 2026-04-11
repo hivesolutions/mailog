@@ -15,6 +15,6 @@ ADD requirements.txt /
 ADD extra.txt /
 ADD src /src
 
-RUN pip3 install -r /requirements.txt && pip3 install -r /extra.txt && pip3 install --upgrade netius uvicorn
+RUN pip install -r /requirements.txt && pip install -r /extra.txt && pip install --upgrade netius uvicorn
 
-CMD ["/usr/local/bin/python3", "/src/mailog/main.py"]
+CMD ["/usr/local/bin/python", "/src/mailog/main.py"]

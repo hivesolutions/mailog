@@ -4,13 +4,13 @@ SMTP relay activity dashboard powered by [Appier](https://github.com/hivesolutio
 
 ## Configuration
 
-| Name                | Type  | Default     | Description                                           |
-| ------------------- | ----- | ----------- | ----------------------------------------------------- |
-| **MONGOHQ_URL**     | `str` | `localhost` | MongoDB connection string                             |
-| **ACTIVITY_SECRET** | `str` | `None`      | Shared secret for webhook authentication (optional)   |
-| **SERVER**          | `str` | `uvicorn`   | ASGI server to use                                    |
-| **HOST**            | `str` | `127.0.0.1` | Bind address                                          |
-| **PORT**            | `int` | `8080`      | Bind port                                             |
+| Name                | Type  | Default     | Description                                         |
+| ------------------- | ----- | ----------- | --------------------------------------------------- |
+| **MONGOHQ_URL**     | `str` | `localhost` | MongoDB connection string                           |
+| **ACTIVITY_SECRET** | `str` | `None`      | Shared secret for webhook authentication (optional) |
+| **SERVER**          | `str` | `uvicorn`   | ASGI server to use                                  |
+| **HOST**            | `str` | `127.0.0.1` | Bind address                                        |
+| **PORT**            | `int` | `8080`      | Bind port                                           |
 
 ## Netius Integration
 
