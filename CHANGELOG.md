@@ -9,10 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* Initial project setup with Appier Admin infrastructure
-* `Activity` model for storing SMTP relay delivery events
-* `POST /api/activity` webhook endpoint with shared secret authentication
-* CSV export link for activity records
+*
 
 ### Changed
 
@@ -21,3 +18,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 *
+
+## [0.1.0] - 2026-04-11
+
+### Added
+
+* Initial project setup with Appier Admin infrastructure
+* `Activity` model for storing SMTP relay delivery events
+* `POST /api/activity` webhook endpoint with shared secret authentication
+* CSV export link for activity records
