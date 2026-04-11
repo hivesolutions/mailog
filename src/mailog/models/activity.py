@@ -3,7 +3,7 @@
 
 from typing import cast
 
-from appier import field, link, not_null
+from appier import field, get_app, link, not_null
 
 from .base import MailogBase
 
@@ -94,6 +94,4 @@ class Activity(MailogBase):
     @classmethod
     @link(name="Export CSV")
     def export_url(cls, absolute: bool = False) -> str | None:
-        from appier import get_app
-
         return get_app().url_for("activity_api.export_csv", absolute=absolute)
