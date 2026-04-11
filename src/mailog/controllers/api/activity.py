@@ -1,9 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from appier import conf, route, OperationalError
+from appier import conf, route, get_object, legacy, OperationalError
 
 from mailog.models import Activity
+
 
 from .root import RootAPIController
 
@@ -25,8 +26,6 @@ class ActivityAPIController(RootAPIController):
 
     @route("/api/activity/export.csv", "GET")
     def export_csv(self) -> bytes:
-        from appier import get_object, legacy
-
         payload = get_object(alias=True, find=True, limit=0)
         activities: list[Activity] = Activity.find(**payload)
         lines: list[str] = [
