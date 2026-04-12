@@ -53,7 +53,26 @@ class ActivityController(BaseController):
 
     @route("/activities/<int:activity_id>/contents/html", "GET")
     @ensure(context="admin")
-    def contents_html(self, activity_id: int) -> bytes:
+    def contents_html(self, activity_id: int) -> str:
+        activity = cast(
+            Activity,
+            Activity.get(id=activity_id, fields=("subject", "contents"), rules=False),
+        )
+        if activity == None:
+            raise NotFoundError(message=f"Activity {activity_id} not found")
+        contents = activity.contents or ""
+        html = self._extract_html(contents)
+        attachments = self._extract_attachments(contents, activity_id)
+        return self.template(
+            "activity/contents.html.tpl",
+            activity=activity,
+            html_body=html,
+            attachments=attachments,
+        )
+
+    @route("/activities/<int:activity_id>/attachments/<int:index>", "GET")
+    @ensure(context="admin")
+    def attachment(self, activity_id: int, index: int) -> bytes:
         activity = cast(
             Activity,
             Activity.get(id=activity_id, fields=("contents",), rules=False),
@@ -61,9 +80,17 @@ class ActivityController(BaseController):
         if activity == None:
             raise NotFoundError(message=f"Activity {activity_id} not found")
         contents = activity.contents or ""
-        html = self._extract_html(contents)
-        self.content_type("text/html; charset=utf-8")
-        return legacy.bytes(html, encoding="utf-8")
+        attachments = self._extract_attachments(contents, activity_id)
+        if index < 0 or index >= len(attachments):
+            raise NotFoundError(message=f"Attachment {index} not found")
+        attachment = attachments[index]
+        data = attachment["data"]
+        self.content_type(attachment["content_type"])
+        self.request.set_header(
+            "Content-Disposition",
+            f"attachment; filename=\"{attachment['filename']}\"",
+        )
+        return data
 
     def _format_timestamp(self, timestamp: float | None) -> str:
         if timestamp == None:
@@ -167,3 +194,39 @@ class ActivityController(BaseController):
             if len(parts) > 1:
                 return parts[1]
             return contents
+
+    def _extract_attachments(self, contents: str, activity_id: int) -> list[dict]:
+        # extracts attachment metadata and data from the raw
+        # MIME contents, skipping inline text parts
+        attachments: list[dict] = []
+        try:
+            message = message_from_string(contents, policy=default)
+            if not message.is_multipart():
+                return attachments
+            index = 0
+            for part in message.walk():
+                disposition = part.get_content_disposition()
+                if not disposition == "attachment":
+                    continue
+                filename = part.get_filename() or f"attachment-{index}"
+                content_type = part.get_content_type()
+                data = part.get_payload(decode=True) or b""
+                attachments.append(
+                    dict(
+                        index=index,
+                        filename=filename,
+                        content_type=content_type,
+                        size=len(data),
+                        size_s=self._format_size(len(data)),
+                        data=data,
+                        url=self.owner.url_for(
+                            "activity.attachment",
+                            activity_id=activity_id,
+                            index=index,
+                        ),
+                    )
+                )
+                index += 1
+        except Exception:
+            pass
+        return attachments

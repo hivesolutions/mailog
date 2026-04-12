@@ -9,11 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-*
+* Add email attachment extraction and download endpoint
+* Add contents viewer template with sandboxed HTML preview and attachment list
 
 ### Changed
 
-*
+* Refactor HTML contents endpoint to use template with iframe preview instead of raw HTML response
 
 ### Fixed
 
