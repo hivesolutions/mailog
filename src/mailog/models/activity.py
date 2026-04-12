@@ -136,6 +136,7 @@ class Activity(MailogBase):
         field(
             type=str,
             safe=True,
+            meta="longtext",
             observations="Full raw email contents (headers + body), only stored when MAILOG_STORE_CONTENTS is enabled",
         ),
     )
