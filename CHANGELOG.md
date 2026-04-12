@@ -13,11 +13,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-* Add `meta="longtext"` to `Activity.contents` field for proper long text rendering
+*
 
 ### Fixed
 
 *
+
+## [0.7.1] - 2026-04-12
+
+### Changed
+
+* Add `meta="longtext"` to `Activity.contents` field for proper long text rendering
+* Mark `Activity.contents` field as `private=True` to exclude from default queries
+* Use `contents_size` to detect contents availability instead of loading the full field
 
 ## [0.7.0] - 2026-04-12
 
