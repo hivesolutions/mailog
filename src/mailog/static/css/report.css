@@ -105,6 +105,28 @@ body {
     font-size: 13px;
 }
 
+.report-dd-muted {
+    color: #bdbdbd;
+    font-size: 13px;
+    font-style: italic;
+}
+
+.report-link {
+    color: #1565c0;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.report-link:hover {
+    text-decoration: underline;
+}
+
+.report-link-sep {
+    color: #e0e0e0;
+    margin: 0px 4px 0px 4px;
+}
+
 /* -- Recipients -- */
 .report-recipients {
     list-style: none;

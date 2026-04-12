@@ -131,6 +131,15 @@ class Activity(MailogBase):
         ),
     )
 
+    contents: str | None = cast(
+        None,
+        field(
+            type=str,
+            safe=True,
+            observations="Full raw email contents (headers + body), only stored when MAILOG_STORE_CONTENTS is enabled",
+        ),
+    )
+
     contents_size: int = cast(
         int,
         field(

@@ -3,8 +3,10 @@
 
 from datetime import datetime, timezone
 from typing import cast
+from email import message_from_string
+from email.policy import default
 
-from appier import route, ensure, NotFoundError
+from appier import conf, route, ensure, legacy, NotFoundError
 
 from mailog.models import Activity
 
@@ -23,13 +25,45 @@ class ActivityController(BaseController):
         sessions = self._format_sessions(activity.sessions or [])
         contents_size_s = self._format_size(getattr(activity, "contents_size", None))
 
+        has_contents = activity.contents not in (None, "")
+        store_contents = conf("MAILOG_STORE_CONTENTS", False, cast=bool)
+
         return self.template(
             "activity/report.html.tpl",
             activity=activity,
             timestamp_s=timestamp_s,
             sessions=sessions,
             contents_size_s=contents_size_s,
+            has_contents=has_contents,
+            store_contents=store_contents,
         )
+
+    @route("/activities/<int:activity_id>/contents/raw", "GET")
+    @ensure(context="admin")
+    def contents_raw(self, activity_id: int) -> bytes:
+        activity = cast(
+            Activity,
+            Activity.get(id=activity_id, fields=("contents",), rules=False),
+        )
+        if activity == None:
+            raise NotFoundError(message=f"Activity {activity_id} not found")
+        contents = activity.contents or ""
+        self.content_type("text/plain; charset=utf-8")
+        return legacy.bytes(contents)
+
+    @route("/activities/<int:activity_id>/contents/html", "GET")
+    @ensure(context="admin")
+    def contents_html(self, activity_id: int) -> bytes:
+        activity = cast(
+            Activity,
+            Activity.get(id=activity_id, fields=("contents",), rules=False),
+        )
+        if activity == None:
+            raise NotFoundError(message=f"Activity {activity_id} not found")
+        contents = activity.contents or ""
+        html = self._extract_html(contents)
+        self.content_type("text/html; charset=utf-8")
+        return legacy.bytes(html)
 
     def _format_timestamp(self, timestamp: float | None) -> str:
         if timestamp == None:
@@ -110,3 +144,26 @@ class ActivityController(BaseController):
         return _datetime.strftime("%H:%M:%S.") + "%03d" % (
             _datetime.microsecond // 1000
         )
+
+    def _extract_html(self, contents: str) -> str:
+        # extracts the HTML body from raw email contents by
+        # parsing as a MIME message and returning the first
+        # text/html part, falls back to the raw body if no
+        # HTML part is found
+        try:
+            message = message_from_string(contents, policy=default)
+            if message.is_multipart():
+                for part in message.walk():
+                    if not part.get_content_type() == "text/html":
+                        continue
+                    return part.get_content()
+            elif message.get_content_type() == "text/html":
+                return message.get_content()
+            return message.get_content()
+        except Exception:
+            # falls back to extracting the body after the
+            # first blank line (end of headers)
+            parts = contents.split("\r\n\r\n", 1)
+            if len(parts) > 1:
+                return parts[1]
+            return contents

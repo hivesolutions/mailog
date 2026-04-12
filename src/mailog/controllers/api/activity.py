@@ -21,6 +21,9 @@ class ActivityAPIController(RootAPIController):
                 raise OperationalError(message="Invalid secret", code=401)
 
         activity = Activity.new(safe=False)
+        store_contents = conf("MAILOG_STORE_CONTENTS", False, cast=bool)
+        if not store_contents:
+            activity.contents = None
         activity.save()
         return activity.map()
 
