@@ -49,7 +49,7 @@ class ActivityController(BaseController):
             raise NotFoundError(message=f"Activity {activity_id} not found")
         contents = activity.contents or ""
         self.content_type("text/plain; charset=utf-8")
-        return legacy.bytes(contents)
+        return legacy.bytes(contents, encoding="utf-8")
 
     @route("/activities/<int:activity_id>/contents/html", "GET")
     @ensure(context="admin")
@@ -63,7 +63,7 @@ class ActivityController(BaseController):
         contents = activity.contents or ""
         html = self._extract_html(contents)
         self.content_type("text/html; charset=utf-8")
-        return legacy.bytes(html)
+        return legacy.bytes(html, encoding="utf-8")
 
     def _format_timestamp(self, timestamp: float | None) -> str:
         if timestamp == None:

@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-*
+* Fix encoding mismatch in raw and HTML contents endpoints by using UTF-8 instead of default latin-1
 
 ## [0.7.1] - 2026-04-12
 
