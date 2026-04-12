@@ -83,6 +83,30 @@ class ActivityController(BaseController):
                     duration_s=self._format_duration(session.get("duration")),
                     recipients=session.get("recipients", []),
                     error=session.get("error"),
+                    transcript=self._format_transcript(session.get("transcript", [])),
                 )
             )
         return formatted
+
+    def _format_transcript(self, transcript: list[dict]) -> list[dict]:
+        # groups consecutive entries with the same direction into
+        # blocks so that the arrow is only shown once per group
+        groups: list[dict] = []
+        for entry in transcript:
+            direction = entry.get("direction")
+            timestamp = entry.get("timestamp")
+            timestamp_s = self._format_timestamp_ms(timestamp)
+            line = dict(message=entry.get("message"), timestamp_s=timestamp_s)
+            if groups and groups[-1]["direction"] == direction:
+                groups[-1]["lines"].append(line)
+            else:
+                groups.append(dict(direction=direction, lines=[line]))
+        return groups
+
+    def _format_timestamp_ms(self, timestamp: float | None) -> str:
+        if timestamp == None:
+            return "-"
+        _datetime = datetime.fromtimestamp(timestamp, tz=timezone.utc)
+        return _datetime.strftime("%H:%M:%S.") + "%03d" % (
+            _datetime.microsecond // 1000
+        )

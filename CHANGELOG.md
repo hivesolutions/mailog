@@ -9,11 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-*
+* Add collapsible SMTP session transcript with directional arrows and millisecond timestamps
 
 ### Changed
 
-*
+* Refactor collapsible CSS classes from headers-specific to shared `report-collapsible` pattern
 
 ### Fixed
 

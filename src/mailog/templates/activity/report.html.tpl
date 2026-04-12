@@ -130,6 +130,27 @@
                         {% if session.error %}
                             <div class="report-session-error">{{ session.error }}</div>
                         {% endif %}
+
+                        {% if session.transcript %}
+                            <details class="report-collapsible report-transcript">
+                                <summary class="report-section-title report-collapsible-toggle">Session Transcript</summary>
+                                <div class="report-transcript-body">
+                                    {% for group in session.transcript %}
+                                        <div class="report-transcript-group report-transcript-{{ group.direction }}">
+                                            <span class="report-transcript-arrow">{{ "→" if group.direction == "send" else "←" }}</span>
+                                            <div class="report-transcript-lines">
+                                                {% for line in group.lines %}
+                                                    <div class="report-transcript-line">
+                                                        <span class="report-transcript-time">{{ line.timestamp_s }}</span>
+                                                        <span class="report-transcript-message">{{ line.message }}</span>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </details>
+                        {% endif %}
                     </div>
                 {% endfor %}
             </section>
@@ -137,8 +158,8 @@
 
         {% if activity.headers %}
             <section class="report-section">
-                <details class="report-headers">
-                    <summary class="report-section-title report-headers-toggle">Message Headers</summary>
+                <details class="report-collapsible report-headers">
+                    <summary class="report-section-title report-collapsible-toggle">Message Headers</summary>
                     <dl class="report-headers-list">
                         {% for key, value in activity.headers.items() %}
                             <dt class="report-headers-key">{{ key }}</dt>

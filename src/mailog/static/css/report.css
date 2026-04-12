@@ -283,8 +283,8 @@ body {
     word-break: break-all;
 }
 
-/* -- Headers (collapsible) -- */
-.report-headers {
+/* -- Collapsible (shared) -- */
+.report-collapsible {
     background: #ffffff;
     border: 1px solid #e8e8e8;
     border-radius: 6px 6px 6px 6px;
@@ -296,7 +296,7 @@ body {
     padding: 0px 0px 0px 0px;
 }
 
-.report-headers-toggle {
+.report-collapsible-toggle {
     cursor: pointer;
     list-style: none;
     margin-bottom: 0px;
@@ -305,11 +305,11 @@ body {
     -webkit-user-select: none;
 }
 
-.report-headers-toggle::-webkit-details-marker {
+.report-collapsible-toggle::-webkit-details-marker {
     display: none;
 }
 
-.report-headers-toggle::before {
+.report-collapsible-toggle::before {
     content: "\25b6";
     color: #bdbdbd;
     display: inline-block;
@@ -318,16 +318,17 @@ body {
     transition: transform 0.15s ease;
 }
 
-.report-headers[open] > .report-headers-toggle::before {
+.report-collapsible[open] > .report-collapsible-toggle::before {
     transform: rotate(90deg);
 }
 
-.report-headers[open] > .report-headers-toggle {
+.report-collapsible[open] > .report-collapsible-toggle {
     border-bottom: 1px solid #f0f0f0;
     margin-bottom: 0px;
     padding-bottom: 16px;
 }
 
+/* -- Headers -- */
 .report-headers-list {
     display: grid;
     grid-template-columns: 140px 1fr;
@@ -347,6 +348,55 @@ body {
     font-family: "IBM Plex Mono", monospace;
     font-size: 11px;
     word-break: break-all;
+}
+
+/* -- Transcript -- */
+.report-transcript {
+    margin-top: 12px;
+    border-color: #f0f0f0;
+}
+
+.report-transcript-body {
+    padding: 12px 16px 12px 16px;
+}
+
+.report-transcript-group {
+    display: flex;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    margin-bottom: 6px;
+    word-break: break-all;
+}
+
+.report-transcript-send {
+    color: #1565c0;
+}
+
+.report-transcript-recv {
+    color: #616161;
+}
+
+.report-transcript-arrow {
+    flex-shrink: 0;
+    margin-right: 6px;
+    padding-top: 1px;
+    width: 12px;
+}
+
+.report-transcript-lines {
+    flex: 1;
+    min-width: 0;
+}
+
+.report-transcript-line {
+    line-height: 1.8;
+}
+
+.report-transcript-time {
+    color: #bdbdbd;
+    display: inline-block;
+    margin-right: 8px;
+    width: 80px;
 }
 
 /* -- Footer -- */
