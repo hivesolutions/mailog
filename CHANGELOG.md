@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+*
+
+### Changed
+
+*
+
+### Fixed
+
+*
+
+## [0.4.0] - 2026-04-12
+
+### Added
+
 * Add delivery report page with per-session TLS, timing, and recipient details
 * Add `server_agent` field to `Activity` model for relay server identification
 * Add `contents_size` field to `Activity` model for message size tracking
@@ -17,10 +31,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 * Add `View Report` instance link to `Activity` model
-
-### Fixed
-
-*
 
 ## [0.3.0] - 2026-04-12
 
