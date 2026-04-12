@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/report.css') }}" />
+    <script src="{{ url_for('static', filename='js/report.js') }}" defer></script>
 </head>
 <body>
     <div class="report">
@@ -58,7 +59,12 @@
                     <dt class="report-dt">Contents</dt>
                     <dd class="report-dd report-dd-muted">Contents storage disabled</dd>
                 {% endif %}
+                <dt class="report-dt">Share</dt>
+                <dd class="report-dd">
+                    <a class="report-link report-copy-json" href="#" onclick="copyActivityJson(event)">Copy JSON</a>
+                </dd>
             </dl>
+            <script id="activity-json" type="application/json">{{ activity_json|safe }}</script>
         </section>
 
         <section class="report-section">

@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+import json
+
 from datetime import datetime, timezone
 from typing import cast
 from email import message_from_string
@@ -28,6 +30,8 @@ class ActivityController(BaseController):
         has_contents = (getattr(activity, "contents_size", None) or 0) > 0
         store_contents = conf("MAILOG_STORE_CONTENTS", False, cast=bool)
 
+        activity_json = self._build_activity_json(activity)
+
         return self.template(
             "activity/report.html.tpl",
             activity=activity,
@@ -36,6 +40,7 @@ class ActivityController(BaseController):
             contents_size_s=contents_size_s,
             has_contents=has_contents,
             store_contents=store_contents,
+            activity_json=activity_json,
         )
 
     @route("/activities/<int:activity_id>/contents", "GET")
@@ -105,6 +110,28 @@ class ActivityController(BaseController):
             f"attachment; filename=\"{attachment['filename']}\"",
         )
         return data
+
+    def _build_activity_json(self, activity) -> str:
+        # builds a JSON string with all activity fields
+        # suitable for sharing with an LLM, excludes raw
+        # email contents to keep the payload focused
+        data = dict(
+            timestamp=activity.timestamp,
+            timestamp_utc=self._format_timestamp(activity.timestamp),
+            sender=activity.sender,
+            recipients=activity.recipients or [],
+            subject=activity.subject,
+            status=activity.status,
+            message_id=activity.message_id,
+            server=activity.server,
+            server_agent=getattr(activity, "server_agent", None),
+            username=getattr(activity, "username", None),
+            contents_size=getattr(activity, "contents_size", None),
+            error=getattr(activity, "error", None),
+            headers=activity.headers or {},
+            sessions=activity.sessions or [],
+        )
+        return json.dumps(data, indent=2, ensure_ascii=False, default=str)
 
     def _format_timestamp(self, timestamp: float | None) -> str:
         if timestamp == None:

@@ -127,6 +127,10 @@ body {
     margin: 0px 4px 0px 4px;
 }
 
+.report-copy-json {
+    cursor: pointer;
+}
+
 /* -- Recipients -- */
 .report-recipients {
     list-style: none;
