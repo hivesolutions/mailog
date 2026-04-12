@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+*
+
+### Changed
+
+*
+
+### Fixed
+
+*
+
+## [0.8.0] - 2026-04-12
+
+### Added
+
 * Add email attachment extraction and download endpoint
 * Add contents viewer template with sandboxed HTML preview and attachment list
 
