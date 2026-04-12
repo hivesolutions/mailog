@@ -35,7 +35,7 @@ class ActivityController(BaseController):
         if timestamp == None:
             return "-"
         _datetime = datetime.fromtimestamp(timestamp, tz=timezone.utc)
-        return _datetime.strftime("%B %d, %Y at %H:%M UTC")
+        return _datetime.strftime("%B %d, %Y at %H:%M:%S UTC")
 
     def _format_duration(self, duration: float | None) -> str | None:
         if duration == None:
