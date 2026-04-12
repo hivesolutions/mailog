@@ -10,7 +10,7 @@ class MailogApp(WebApp):
         WebApp.__init__(self, name="mailog", parts=(AdminPart,), *args, **kwargs)
 
     def _version(self) -> str:
-        return "0.8.1"
+        return "0.9.0"
 
     def _description(self) -> str:
         return "Mailog"

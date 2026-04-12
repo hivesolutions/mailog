@@ -9,16 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+*
+
+### Changed
+
+*
+
+### Fixed
+
+*
+
+## [0.9.0] - 2026-04-12
+
+### Added
+
 * Add "Copy JSON" button to activity report for sharing full activity data with LLMs
 
 ### Changed
 
 * Reorganize contents endpoints: `/contents` for viewer, `/contents/raw` for raw text, `/contents/html` for HTML body
 * Reorder controller methods to group contents endpoints logically
-
-### Fixed
-
-*
 
 ## [0.8.1] - 2026-04-12
 
