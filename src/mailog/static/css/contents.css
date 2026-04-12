@@ -77,10 +77,10 @@ body {
 }
 
 .contents-attachment-name {
-    flex: 1;
     font-family: "IBM Plex Mono", monospace;
     font-size: 13px;
     font-weight: 500;
+    flex: 1;
 }
 
 .contents-attachment-size {

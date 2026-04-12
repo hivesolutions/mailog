@@ -186,9 +186,9 @@ body {
 /* -- Capabilities -- */
 .report-capabilities {
     display: flex;
+    margin-top: 12px;
     flex-wrap: wrap;
     gap: 4px;
-    margin-top: 12px;
 }
 
 .report-capability {
@@ -328,6 +328,10 @@ body {
     margin-bottom: 0px;
     padding: 16px 20px 16px 20px;
     user-select: none;
+    -o-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
     -webkit-user-select: none;
 }
 
@@ -336,8 +340,8 @@ body {
 }
 
 .report-collapsible-toggle::before {
-    content: "\25b6";
     color: #bdbdbd;
+    content: "\25b6";
     display: inline-block;
     font-size: 9px;
     margin-right: 8px;
@@ -345,6 +349,11 @@ body {
 
 .report-collapsible[open] > .report-collapsible-toggle::before {
     transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -khtml-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
 }
 
 .report-collapsible[open] > .report-collapsible-toggle {
@@ -356,9 +365,9 @@ body {
 /* -- Headers -- */
 .report-headers-list {
     display: grid;
+    padding: 16px 20px 16px 20px;
     grid-template-columns: 140px 1fr;
     gap: 4px 12px;
-    padding: 16px 20px 16px 20px;
 }
 
 .report-headers-key {
@@ -377,8 +386,8 @@ body {
 
 /* -- Transcript -- */
 .report-transcript {
-    margin-top: 12px;
     border-color: #f0f0f0;
+    margin-top: 12px;
 }
 
 .report-transcript-body {
