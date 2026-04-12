@@ -337,7 +337,6 @@ body {
     display: inline-block;
     font-size: 9px;
     margin-right: 8px;
-    transition: transform 0.15s ease;
 }
 
 .report-collapsible[open] > .report-collapsible-toggle::before {

@@ -9,11 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-*
+* Add dedicated `/contents/body` endpoint for serving extracted HTML body
 
 ### Changed
 
-*
+* Render email HTML body in an iframe instead of inline for better isolation
+* Rename `contents-body` CSS class to `contents-frame`
+* Remove CSS transition effects from collapsible toggle and attachment items
 
 ### Fixed
 

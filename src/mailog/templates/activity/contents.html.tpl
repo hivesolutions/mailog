@@ -11,9 +11,7 @@
 </head>
 <body>
     <div class="contents-page">
-        <div class="contents-body">
-            {{ html_body|safe }}
-        </div>
+        <iframe class="contents-frame" src="{{ url_for('activity.contents_body', activity_id=activity.id) }}"></iframe>
 
         {% if attachments %}
             <div class="contents-attachments">

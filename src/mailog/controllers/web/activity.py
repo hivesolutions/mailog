@@ -56,19 +56,31 @@ class ActivityController(BaseController):
     def contents_html(self, activity_id: int) -> str:
         activity = cast(
             Activity,
-            Activity.get(id=activity_id, fields=("subject", "contents"), rules=False),
+            Activity.get(id=activity_id, fields=("id", "subject", "contents"), rules=False),
+        )
+        if activity == None:
+            raise NotFoundError(message=f"Activity {activity_id} not found")
+        contents = activity.contents or ""
+        attachments = self._extract_attachments(contents, activity_id)
+        return self.template(
+            "activity/contents.html.tpl",
+            activity=activity,
+            attachments=attachments,
+        )
+
+    @route("/activities/<int:activity_id>/contents/body", "GET")
+    @ensure(context="admin")
+    def contents_body(self, activity_id: int) -> bytes:
+        activity = cast(
+            Activity,
+            Activity.get(id=activity_id, fields=("contents",), rules=False),
         )
         if activity == None:
             raise NotFoundError(message=f"Activity {activity_id} not found")
         contents = activity.contents or ""
         html = self._extract_html(contents)
-        attachments = self._extract_attachments(contents, activity_id)
-        return self.template(
-            "activity/contents.html.tpl",
-            activity=activity,
-            html_body=html,
-            attachments=attachments,
-        )
+        self.content_type("text/html; charset=utf-8")
+        return legacy.bytes(html, encoding="utf-8")
 
     @route("/activities/<int:activity_id>/attachments/<int:index>", "GET")
     @ensure(context="admin")

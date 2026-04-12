@@ -21,7 +21,7 @@ body {
     padding: 40px 24px 80px 24px;
 }
 
-.contents-body {
+.contents-frame {
     background: #ffffff;
     border: 1px solid #e8e8e8;
     border-radius: 6px 6px 6px 6px;
@@ -30,8 +30,9 @@ body {
     -moz-border-radius: 6px 6px 6px 6px;
     -khtml-border-radius: 6px 6px 6px 6px;
     -webkit-border-radius: 6px 6px 6px 6px;
-    overflow: hidden;
-    padding: 0px 0px 0px 0px;
+    display: block;
+    min-height: 400px;
+    width: 100%;
 }
 
 /* -- Attachments -- */
@@ -64,7 +65,6 @@ body {
     margin-bottom: 8px;
     padding: 12px 16px 12px 16px;
     text-decoration: none;
-    transition: border-color 0.15s ease;
 }
 
 .contents-attachment:hover {
@@ -94,6 +94,6 @@ body {
 @media print {
     body { background: #fff; }
     .contents-page { padding: 0; }
-    .contents-body { border: none; }
+    .contents-frame { border: none; }
     .contents-attachment { break-inside: avoid; }
 }
