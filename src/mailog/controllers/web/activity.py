@@ -56,7 +56,9 @@ class ActivityController(BaseController):
     def contents_html(self, activity_id: int) -> str:
         activity = cast(
             Activity,
-            Activity.get(id=activity_id, fields=("id", "subject", "contents"), rules=False),
+            Activity.get(
+                id=activity_id, fields=("id", "subject", "contents"), rules=False
+            ),
         )
         if activity == None:
             raise NotFoundError(message=f"Activity {activity_id} not found")
