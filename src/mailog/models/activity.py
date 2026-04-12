@@ -21,22 +21,42 @@ STATUS_C: dict[str, str] = dict(
 class Activity(MailogBase):
     timestamp: float = cast(
         float,
-        field(type=float, index=True, safe=True, meta="datetime"),
+        field(
+            type=float,
+            index=True,
+            safe=True,
+            meta="datetime",
+            observations="UTC epoch when the relay event occurred",
+        ),
     )
 
     sender: str | None = cast(
         None,
-        field(type=str, index=True, safe=True, meta="email"),
+        field(
+            type=str,
+            index=True,
+            safe=True,
+            meta="email",
+            observations="Envelope sender (MAIL FROM) address",
+        ),
     )
 
     recipients: list[str] = cast(
         list[str],
-        field(type=list, safe=True),
+        field(
+            type=list,
+            safe=True,
+            observations="Envelope recipients (RCPT TO) addresses",
+        ),
     )
 
     subject: str = cast(
         str,
-        field(type=str, safe=True),
+        field(
+            type=str,
+            safe=True,
+            observations="Email subject line from the message header",
+        ),
     )
 
     status: str = cast(
@@ -48,27 +68,48 @@ class Activity(MailogBase):
             meta="enum",
             enum=STATUS_S,
             colors=STATUS_C,
+            observations="Overall delivery outcome (delivered or failed)",
         ),
     )
 
     message_id: str = cast(
         str,
-        field(type=str, index=True, safe=True, description="Message-ID"),
+        field(
+            type=str,
+            index=True,
+            safe=True,
+            description="Message-ID",
+            observations="RFC 2822 Message-ID header value",
+        ),
     )
 
     server: str = cast(
         str,
-        field(type=str, index=True, safe=True),
+        field(
+            type=str,
+            index=True,
+            safe=True,
+            observations="SMTP relay server that processed the message",
+        ),
     )
 
     username: str | None = cast(
         None,
-        field(type=str, index=True, safe=True),
+        field(
+            type=str,
+            index=True,
+            safe=True,
+            observations="SMTP AUTH username used for relay authentication",
+        ),
     )
 
     headers: dict = cast(
         dict,
-        field(type=dict, safe=True),
+        field(
+            type=dict,
+            safe=True,
+            observations="Raw email headers as key-value pairs",
+        ),
     )
 
     sessions: list[dict] = cast(
@@ -83,7 +124,11 @@ class Activity(MailogBase):
 
     error: str | None = cast(
         None,
-        field(type=str, safe=True),
+        field(
+            type=str,
+            safe=True,
+            observations="SMTP error or bounce reason when delivery fails",
+        ),
     )
 
     @classmethod
