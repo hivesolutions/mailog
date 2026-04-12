@@ -22,7 +22,12 @@ setuptools.setup(
         "mailog.models",
     ],
     package_dir={"": os.path.normpath("src")},
-    package_data={"mailog": ["templates/*.tpl"]},
+    package_data={
+        "mailog": [
+            "static/css/*.css",
+            "templates/**/*.tpl",
+        ]
+    },
     install_requires=["appier", "appier-extras"],
     classifiers=[
         "Development Status :: 3 - Alpha",

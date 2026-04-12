@@ -93,6 +93,15 @@ class Activity(MailogBase):
         ),
     )
 
+    server_agent: str | None = cast(
+        None,
+        field(
+            type=str,
+            safe=True,
+            observations="Relay server agent string (eg: netius/1.42.0)",
+        ),
+    )
+
     username: str | None = cast(
         None,
         field(
@@ -119,6 +128,15 @@ class Activity(MailogBase):
             safe=True,
             description="Delivery Sessions",
             observations="Per-domain SMTP session deliverability info",
+        ),
+    )
+
+    contents_size: int = cast(
+        int,
+        field(
+            type=int,
+            safe=True,
+            observations="Message contents size in bytes",
         ),
     )
 
@@ -149,6 +167,12 @@ class Activity(MailogBase):
             not_null("timestamp"),
             not_null("status"),
         ]
+
+    @link(name="View Report")
+    def report_url(self, absolute: bool = False) -> str | None:
+        return get_app().url_for(
+            "activity.report", activity_id=self.id, absolute=absolute
+        )
 
     @classmethod
     @link(name="Export CSV")
