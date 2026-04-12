@@ -135,6 +135,20 @@
             </section>
         {% endif %}
 
+        {% if activity.headers %}
+            <section class="report-section">
+                <details class="report-headers">
+                    <summary class="report-section-title report-headers-toggle">Message Headers</summary>
+                    <dl class="report-headers-list">
+                        {% for key, value in activity.headers.items() %}
+                            <dt class="report-headers-key">{{ key }}</dt>
+                            <dd class="report-headers-value">{{ value }}</dd>
+                        {% endfor %}
+                    </dl>
+                </details>
+            </section>
+        {% endif %}
+
         <footer class="report-footer">
             Mailog Delivery Report
         </footer>

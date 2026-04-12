@@ -278,8 +278,74 @@ body {
     color: #616161;
     font-family: "IBM Plex Mono", monospace;
     font-size: 12px;
-    margin-top: 4px;
+    margin-top: 16px;
     padding: 8px 12px 8px 12px;
+    word-break: break-all;
+}
+
+/* -- Headers (collapsible) -- */
+.report-headers {
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
+    border-radius: 6px 6px 6px 6px;
+    -o-border-radius: 6px 6px 6px 6px;
+    -ms-border-radius: 6px 6px 6px 6px;
+    -moz-border-radius: 6px 6px 6px 6px;
+    -khtml-border-radius: 6px 6px 6px 6px;
+    -webkit-border-radius: 6px 6px 6px 6px;
+    padding: 0px 0px 0px 0px;
+}
+
+.report-headers-toggle {
+    cursor: pointer;
+    list-style: none;
+    margin-bottom: 0px;
+    padding: 16px 20px 16px 20px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.report-headers-toggle::-webkit-details-marker {
+    display: none;
+}
+
+.report-headers-toggle::before {
+    content: "\25b6";
+    color: #bdbdbd;
+    display: inline-block;
+    font-size: 9px;
+    margin-right: 8px;
+    transition: transform 0.15s ease;
+}
+
+.report-headers[open] > .report-headers-toggle::before {
+    transform: rotate(90deg);
+}
+
+.report-headers[open] > .report-headers-toggle {
+    border-bottom: 1px solid #f0f0f0;
+    margin-bottom: 0px;
+    padding-bottom: 16px;
+}
+
+.report-headers-list {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 4px 12px;
+    padding: 16px 20px 16px 20px;
+}
+
+.report-headers-key {
+    color: #9e9e9e;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.report-headers-value {
+    color: #616161;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
     word-break: break-all;
 }
 
