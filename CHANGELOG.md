@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* Add `observations` to all `Activity` model fields for better documentation
+*
 
 ### Changed
 
@@ -18,6 +18,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 *
+
+## [0.3.0] - 2026-04-12
+
+### Added
+
+* Add `observations` to all `Activity` model fields for better documentation
 
 ## [0.2.0] - 2026-04-12
 
