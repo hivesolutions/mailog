@@ -9,11 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-*
+* Add SMTP capabilities display as badges in delivery report sessions
+* Add session start and end timestamps to delivery report
 
 ### Changed
 
-*
+* Replace per-session message size with start/end time fields in session formatting
 
 ### Fixed
 

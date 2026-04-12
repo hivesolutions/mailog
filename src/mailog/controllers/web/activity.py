@@ -78,9 +78,9 @@ class ActivityController(BaseController):
                     starttls=session.get("starttls", False),
                     tls_version=session.get("tls_version"),
                     tls_cipher=self._format_cipher(session.get("tls_cipher")),
+                    start_time_s=self._format_timestamp(session.get("start_time")),
+                    end_time_s=self._format_timestamp(session.get("end_time")),
                     duration_s=self._format_duration(session.get("duration")),
-                    message_size=session.get("message_size"),
-                    size_s=self._format_size(session.get("message_size")),
                     recipients=session.get("recipients", []),
                     error=session.get("error"),
                 )

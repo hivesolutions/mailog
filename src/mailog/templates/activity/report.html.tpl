@@ -101,9 +101,21 @@
                                 <dt class="report-dt">Cipher</dt>
                                 <dd class="report-dd report-dd-mono">{{ session.tls_cipher }}</dd>
                             {% endif %}
+                            <dt class="report-dt">Started</dt>
+                            <dd class="report-dd report-dd-mono">{{ session.start_time_s }}</dd>
+                            <dt class="report-dt">Finished</dt>
+                            <dd class="report-dd report-dd-mono">{{ session.end_time_s }}</dd>
                             <dt class="report-dt">Recipients</dt>
                             <dd class="report-dd">{{ ", ".join(session.recipients or []) }}</dd>
                         </dl>
+
+                        {% if session.capabilities %}
+                            <div class="report-capabilities">
+                                {% for cap in session.capabilities %}
+                                    <span class="report-capability">{{ cap }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
 
                         {% if session.greeting %}
                             <div class="report-server-response" title="Server greeting (220 banner)">

@@ -157,6 +157,31 @@ body {
     margin-left: auto;
 }
 
+/* -- Capabilities -- */
+.report-capabilities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 12px;
+}
+
+.report-capability {
+    background: #f5f5f5;
+    border-radius: 3px 3px 3px 3px;
+    -o-border-radius: 3px 3px 3px 3px;
+    -ms-border-radius: 3px 3px 3px 3px;
+    -moz-border-radius: 3px 3px 3px 3px;
+    -khtml-border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 3px 3px 3px 3px;
+    color: #9e9e9e;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 2px 6px 2px 6px;
+    text-transform: uppercase;
+}
+
 /* -- TLS badge -- */
 .report-tls {
     align-items: center;
