@@ -25,7 +25,7 @@ class ActivityController(BaseController):
         sessions = self._format_sessions(activity.sessions or [])
         contents_size_s = self._format_size(getattr(activity, "contents_size", None))
 
-        has_contents = activity.contents not in (None, "")
+        has_contents = (getattr(activity, "contents_size", None) or 0) > 0
         store_contents = conf("MAILOG_STORE_CONTENTS", False, cast=bool)
 
         return self.template(
