@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+*
+
+### Changed
+
+*
+
+### Fixed
+
+*
+
+## [0.7.0] - 2026-04-12
+
+### Added
+
 * Add `contents` field to `Activity` model for storing full raw email contents
 * Add `MAILOG_STORE_CONTENTS` config option to control email contents storage
 * Add raw and HTML contents viewer endpoints in delivery report
@@ -17,10 +31,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 * Update README with `MAILOG_STORE_CONTENTS` configuration entry
-
-### Fixed
-
-*
 
 ## [0.6.0] - 2026-04-12
 
