@@ -52,7 +52,7 @@
                     <dd class="report-dd">
                         <a class="report-link" href="{{ url_for('activity.contents_raw', activity_id=activity.id) }}" target="_blank">View Raw</a>
                         <span class="report-link-sep">/</span>
-                        <a class="report-link" href="{{ url_for('activity.contents_html', activity_id=activity.id) }}" target="_blank">View HTML</a>
+                        <a class="report-link" href="{{ url_for('activity.contents', activity_id=activity.id) }}" target="_blank">View HTML</a>
                     </dd>
                 {% elif not store_contents %}
                     <dt class="report-dt">Contents</dt>

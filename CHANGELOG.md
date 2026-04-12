@@ -13,7 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-*
+* Reorganize contents endpoints: `/contents` for viewer, `/contents/raw` for raw text, `/contents/html` for HTML body
+* Reorder controller methods to group contents endpoints logically
 
 ### Fixed
 

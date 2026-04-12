@@ -38,22 +38,9 @@ class ActivityController(BaseController):
             store_contents=store_contents,
         )
 
-    @route("/activities/<int:activity_id>/contents/raw", "GET")
+    @route("/activities/<int:activity_id>/contents", "GET")
     @ensure(context="admin")
-    def contents_raw(self, activity_id: int) -> bytes:
-        activity = cast(
-            Activity,
-            Activity.get(id=activity_id, fields=("contents",), rules=False),
-        )
-        if activity == None:
-            raise NotFoundError(message=f"Activity {activity_id} not found")
-        contents = activity.contents or ""
-        self.content_type("text/plain; charset=utf-8")
-        return legacy.bytes(contents, encoding="utf-8")
-
-    @route("/activities/<int:activity_id>/contents/html", "GET")
-    @ensure(context="admin")
-    def contents_html(self, activity_id: int) -> str:
+    def contents(self, activity_id: int) -> str:
         activity = cast(
             Activity,
             Activity.get(
@@ -70,9 +57,22 @@ class ActivityController(BaseController):
             attachments=attachments,
         )
 
-    @route("/activities/<int:activity_id>/contents/body", "GET")
+    @route("/activities/<int:activity_id>/contents/raw", "GET")
     @ensure(context="admin")
-    def contents_body(self, activity_id: int) -> bytes:
+    def contents_raw(self, activity_id: int) -> bytes:
+        activity = cast(
+            Activity,
+            Activity.get(id=activity_id, fields=("contents",), rules=False),
+        )
+        if activity == None:
+            raise NotFoundError(message=f"Activity {activity_id} not found")
+        contents = activity.contents or ""
+        self.content_type("text/plain; charset=utf-8")
+        return legacy.bytes(contents, encoding="utf-8")
+
+    @route("/activities/<int:activity_id>/contents/html", "GET")
+    @ensure(context="admin")
+    def contents_html(self, activity_id: int) -> bytes:
         activity = cast(
             Activity,
             Activity.get(id=activity_id, fields=("contents",), rules=False),
