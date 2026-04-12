@@ -6,7 +6,7 @@ import setuptools
 
 setuptools.setup(
     name="mailog",
-    version="0.8.0",
+    version="0.8.1",
     author="Hive Solutions Lda.",
     author_email="development@hive.pt",
     description="SMTP relay activity dashboard",
