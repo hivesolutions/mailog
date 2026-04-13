@@ -42,4 +42,3 @@ PYTHONPATH=src python -m mailog
 ## License
 
 Mailog is currently licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/).
-
