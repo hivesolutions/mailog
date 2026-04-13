@@ -19,7 +19,7 @@ class ActivityController(BaseController):
     @route("/activities/<int:activity_id>/report", "GET")
     @ensure(context="admin")
     def report(self, activity_id: int) -> str:
-        activity = cast(Activity, Activity.get(id=activity_id, rules=False))
+        activity = cast(Activity, Activity.get(id=activity_id))
         if activity == None:
             raise NotFoundError(message=f"Activity {activity_id} not found")
 
@@ -27,7 +27,7 @@ class ActivityController(BaseController):
         sessions = self._format_sessions(activity.sessions or [])
         contents_size_s = self._format_size(getattr(activity, "contents_size", None))
 
-        has_contents = bool(getattr(activity, "contents", None))
+        has_contents = (getattr(activity, "contents_size", None) or 0) > 0
         store_contents = conf("MAILOG_STORE_CONTENTS", False, cast=bool)
 
         activity_json = self._build_activity_json(activity)
