@@ -216,18 +216,22 @@ class ActivityController(BaseController):
     def _extract_html(self, contents: str) -> str:
         # extracts the HTML body from raw email contents by
         # parsing as a MIME message and returning the first
-        # text/html part, falls back to the raw body if no
-        # HTML part is found
+        # text/html part, falls back to wrapping text/plain
+        # in a minimal HTML shell when no HTML part is found
         try:
             message = message_from_string(contents, policy=default)
             if message.is_multipart():
+                plain = None
                 for part in message.walk():
-                    if not part.get_content_type() == "text/html":
-                        continue
-                    return part.get_content()
+                    if part.get_content_type() == "text/html":
+                        return part.get_content()
+                    if part.get_content_type() == "text/plain" and plain is None:
+                        plain = part.get_content()
+                if plain is not None:
+                    return self._wrap_plain(plain)
             elif message.get_content_type() == "text/html":
                 return message.get_content()
-            return message.get_content()
+            return self._wrap_plain(message.get_content())
         except Exception:
             # falls back to extracting the body after the
             # first blank line (end of headers)
@@ -235,6 +239,12 @@ class ActivityController(BaseController):
             if len(parts) > 1:
                 return parts[1]
             return contents
+
+    def _wrap_plain(self, text: str) -> str:
+        # wraps plain text in a minimal HTML shell so it
+        # renders cleanly inside the contents iframe
+        escaped = text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+        return f"<html><body><pre>{escaped}</pre></body></html>"
 
     def _extract_attachments(self, contents: str, activity_id: int) -> list[dict]:
         # extracts attachment metadata and data from the raw
