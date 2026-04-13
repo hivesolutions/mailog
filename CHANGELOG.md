@@ -17,6 +17,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+*
+
+## [0.9.1] - 2026-04-13
+
+### Fixed
+
 * Fix HTML rendering of plain-text-only emails in the contents iframe
 * Fix contents links showing when contents data is not stored
 
