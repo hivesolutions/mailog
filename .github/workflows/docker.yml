@@ -51,7 +51,7 @@ jobs:
       - name: Trigger mailog deployment
         if: github.event_name == 'push' && github.ref_name == 'master'
         run: |
-          curl -s --fail-with-body -X POST \
+          curl -sf -X POST \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer ${{ secrets.INFRA_DEPLOY_PAT }}" \
             https://api.github.com/repos/hivesolutions/infra-bemisc/dispatches \
@@ -60,7 +60,7 @@ jobs:
       - name: Trigger mailog stable deployment
         if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
         run: |
-          curl -s --fail-with-body -X POST \
+          curl -sf -X POST \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer ${{ secrets.INFRA_DEPLOY_PAT }}" \
             https://api.github.com/repos/hivesolutions/infra-bemisc/dispatches \
