@@ -2,6 +2,16 @@
 
 SMTP relay activity dashboard powered by [Appier](https://github.com/hivesolutions/appier). Receives delivery status webhooks from [netius](https://github.com/hivesolutions/netius) `ActivityRelaySMTPServer` and provides an admin interface for browsing email activity.
 
+## Features
+
+* Delivery status tracking with per-recipient session details and SMTP transcripts
+* TLS negotiation visibility including protocol version and cipher information
+* Full email contents storage with raw and HTML viewing modes
+* MIME attachment extraction and individual download support
+* One-click JSON export of activity data for LLM-assisted analysis
+* CSV export for bulk activity reporting
+* Webhook authentication via shared secret
+
 ## Configuration
 
 | Name                      | Type   | Default     | Description                                                                                     |
