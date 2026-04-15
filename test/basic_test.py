@@ -7,7 +7,7 @@ from mailog import MailogApp, Activity
 def test_app_boot() -> None:
     app = MailogApp()
     assert app is not None
-    assert app._version() == "0.9.1"
+    assert app._version() == "0.10.0"
 
 
 def test_activity_model() -> None:

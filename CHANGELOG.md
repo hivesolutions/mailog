@@ -19,6 +19,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 *
 
+## [0.10.0] - 2026-04-15
+
+### Added
+
+* Add Features section to README.md describing main capabilities
+* Add deployment dispatch triggers in Docker workflow for automatic infra deployment
+
+### Changed
+
+*
+
+### Fixed
+
+* Fix curl flag from `--fail-with-body` to `-f` for broader compatibility in deployment dispatch
+* Fix hardened deployment dispatch steps with proper quoting and conditions
+
 ## [0.9.1] - 2026-04-13
 
 ### Fixed
