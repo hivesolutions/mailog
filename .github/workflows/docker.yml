@@ -50,18 +50,17 @@ jobs:
 
       - name: Trigger mailog deployment
         if: github.event_name == 'push' && github.ref_name == 'master'
-        run: |
-          curl -sf -X POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${{ secrets.INFRA_DEPLOY_PAT }}" \
-            https://api.github.com/repos/hivesolutions/infra-bemisc/dispatches \
-            -d '{"event_type":"deploy-mailog-latest"}'
+        uses: hivesolutions/deploy-action@v1
+        with:
+          repository: hivesolutions/infra-bemisc
+          service: mailog
+          token: ${{ secrets.INFRA_DEPLOY_PAT }}
 
       - name: Trigger mailog stable deployment
         if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
-        run: |
-          curl -sf -X POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${{ secrets.INFRA_DEPLOY_PAT }}" \
-            https://api.github.com/repos/hivesolutions/infra-bemisc/dispatches \
-            -d '{"event_type":"deploy-mailog","client_payload":{"tag":${{ toJSON(github.ref_name) }}}}'
+        uses: hivesolutions/deploy-action@v1
+        with:
+          repository: hivesolutions/infra-bemisc
+          service: mailog
+          tag: ${{ github.ref_name }}
+          token: ${{ secrets.INFRA_DEPLOY_PAT }}

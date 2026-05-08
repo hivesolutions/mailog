@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-*
+* Replace inline `curl` deployment dispatch steps in Docker workflow with `hivesolutions/deploy-action`
 
 ### Fixed
 
