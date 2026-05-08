@@ -54,6 +54,7 @@ jobs:
         with:
           repository: hivesolutions/infra-bemisc
           service: mailog
+          group: mail
           token: ${{ secrets.INFRA_DEPLOY_PAT }}
 
       - name: Trigger mailog stable deployment
@@ -62,5 +63,6 @@ jobs:
         with:
           repository: hivesolutions/infra-bemisc
           service: mailog
+          group: mail
           tag: ${{ github.ref_name }}
           token: ${{ secrets.INFRA_DEPLOY_PAT }}
