@@ -15,7 +15,9 @@ ADD requirements.txt /
 ADD extra.txt /
 ADD src /src
 
-RUN pip install --no-cache-dir -r /requirements.txt && pip install --no-cache-dir -r /extra.txt && pip install --no-cache-dir --upgrade netius uvicorn
+RUN pip install --no-cache-dir -r /requirements.txt && \
+    pip install --no-cache-dir -r /extra.txt && \
+    pip install --no-cache-dir --upgrade netius uvicorn
 
 RUN useradd -r -s /bin/false mailog
 USER mailog
