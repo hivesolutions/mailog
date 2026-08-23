@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 * Replace inline `curl` deployment dispatch steps in Docker workflow with `hivesolutions/deploy-action`
+* Add compound `timestamp` and `_id` index to `Activity` matching the admin listing sort
+* Replace the dual direction single field indexes of `Activity` with simple ascending ones
 
 ### Fixed
 

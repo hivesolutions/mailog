@@ -23,7 +23,6 @@ class Activity(MailogBase):
         float,
         field(
             type=float,
-            index=True,
             safe=True,
             meta="datetime",
             observations="UTC epoch when the relay event occurred",
@@ -34,7 +33,7 @@ class Activity(MailogBase):
         None,
         field(
             type=str,
-            index=True,
+            index="simple",
             safe=True,
             meta="email",
             observations="Envelope sender (MAIL FROM) address",
@@ -63,7 +62,7 @@ class Activity(MailogBase):
         str,
         field(
             type=str,
-            index=True,
+            index="simple",
             safe=True,
             meta="enum",
             enum=STATUS_S,
@@ -76,7 +75,7 @@ class Activity(MailogBase):
         str,
         field(
             type=str,
-            index=True,
+            index="simple",
             safe=True,
             description="Message-ID",
             observations="RFC 2822 Message-ID header value",
@@ -87,7 +86,7 @@ class Activity(MailogBase):
         str,
         field(
             type=str,
-            index=True,
+            index="simple",
             safe=True,
             observations="SMTP relay server that processed the message",
         ),
@@ -106,7 +105,7 @@ class Activity(MailogBase):
         None,
         field(
             type=str,
-            index=True,
+            index="simple",
             safe=True,
             observations="SMTP AUTH username used for relay authentication",
         ),
@@ -171,6 +170,15 @@ class Activity(MailogBase):
     @classmethod
     def order_name(cls) -> tuple[str, int]:
         return ("timestamp", -1)
+
+    @classmethod
+    def indexes(cls) -> list:
+        # includes the compound index that matches the listing sort,
+        # note that the id tie-breaker is the one appended by appier
+        # to any sorted and paginated query
+        return super(Activity, cls).indexes() + [
+            ([("timestamp", -1), ("_id", 1)], "simple")
+        ]
 
     @classmethod
     def validate(cls) -> list:
